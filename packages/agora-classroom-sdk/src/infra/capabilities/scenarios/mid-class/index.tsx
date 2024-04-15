@@ -23,12 +23,12 @@ import { useEffect, useState } from 'react';
 
 export const MidClassScenario = () => {
   const [isSingle, setIsSingle] = useState<boolean>(false);
-  console.log('isSingle', isSingle);
-  console.log(sessionStorage.getItem('role'), 'session-role');
+  // Screen-Num-Config-alex-tag
+  const screenNumLimit = 2;
   useEffect(() => {
     // const role = sessionStorage.getItem('role');
     const screenNum = sessionStorage.getItem('screen');
-    if (screenNum && +screenNum >= 2) {
+    if (screenNum && +screenNum >= screenNumLimit) {
       setIsSingle(false);
     }
   });
