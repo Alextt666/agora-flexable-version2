@@ -29,6 +29,7 @@ export const useClasstalkSystem = () => {
           console.log(sysObj);
           const powBase = 10 ** 9;
           setScreenNum(sn);
+          sessionStorage.setItem('screen', sn);
           setSysMemo(Math.floor(mm / powBase));
           setSysFreeMemo(Math.floor(rm / powBase));
         } catch (error) {

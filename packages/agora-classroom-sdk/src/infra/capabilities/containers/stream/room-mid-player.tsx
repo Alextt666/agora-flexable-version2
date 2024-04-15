@@ -5,6 +5,7 @@ import { EduInteractiveUIClassStore } from '@classroom/infra/stores/interactive'
 import { CarouselGroup, NavGroup } from '.';
 import { visibilityControl, studentVideoEnabled, teacherVideoEnabled } from 'agora-common-libs';
 import { DragableStream } from './draggable-stream';
+import { useStore } from '@classroom/infra/hooks/ui-store';
 
 export const RoomMidStreamsContainer = observer(() => {
   const { streamUIStore } = useInteractiveUIStores() as EduInteractiveUIClassStore;
@@ -27,6 +28,13 @@ export const TeacherStream = visibilityControl(
   observer(() => {
     const { streamUIStore } = useInteractiveUIStores() as EduInteractiveUIClassStore;
     const { teacherCameraStream, videoStreamSize, gap } = streamUIStore;
+
+    // alex-tag
+    // expandPlayerUIStore
+    const { expandPlayerUIStore } = useStore();
+    if (teacherCameraStream) {
+      expandPlayerUIStore.openWindow();
+    }
 
     const style = {
       marginRight: gap - 2,

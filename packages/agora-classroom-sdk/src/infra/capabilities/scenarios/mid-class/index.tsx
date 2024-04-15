@@ -19,42 +19,95 @@ import { WidgetContainer } from '../../containers/widget';
 import { Chat, Watermark, Whiteboard } from '../../containers/widget/slots';
 import { StreamWindowsContainer } from '../../containers/stream-window';
 import CameraPreview from '../../containers/camera-preview';
+import { useEffect, useState } from 'react';
 
 export const MidClassScenario = () => {
+  const [isSingle, setIsSingle] = useState<boolean>(false);
+  console.log('isSingle', isSingle);
+  console.log(sessionStorage.getItem('role'), 'session-role');
+  useEffect(() => {
+    // const role = sessionStorage.getItem('role');
+    const screenNum = sessionStorage.getItem('screen');
+    if (screenNum && +screenNum >= 2) {
+      setIsSingle(false);
+    }
+  });
+  return <Room>{isSingle ? <AgoraOriginSingle /> : <ClassTalkDouble />}</Room>;
+};
+
+// Agora-origin-single
+const AgoraOriginSingle = () => {
   // layout
   const layoutCls = classnames('edu-room', 'mid-class-room');
   const { shareUIStore } = useStore();
-
   return (
-    <Room>
-      <FixedAspectRatioRootBox trackMargin={{ top: shareUIStore.navHeight }}>
-        <SceneSwitch>
-          <Layout className={layoutCls} direction="col">
-            <NavigationBar />
-            <Layout
-              className="fcr-flex-grow fcr-items-stretch fcr-relative fcr-justify-center fcr-room-bg"
-              direction="col">
-              <RoomMidStreamsContainer />
-              <Whiteboard />
-              <ScreenShareContainer />
-              <StreamWindowsContainer />
-            </Layout>
-            <WhiteboardToolbar />
-            <ScenesController />
-            <Float bottom={15} right={10} align="flex-end" gap={2}>
-              <HandsUpContainer />
-              <Chat />
-            </Float>
-            <DialogContainer />
-            <LoadingContainer />
+    <FixedAspectRatioRootBox trackMargin={{ top: shareUIStore.navHeight }}>
+      <SceneSwitch>
+        <Layout className={layoutCls} direction="col">
+          <NavigationBar />
+          <Layout
+            className="fcr-flex-grow fcr-items-stretch fcr-relative fcr-justify-center fcr-room-bg"
+            direction="col">
+            <RoomMidStreamsContainer />
+            <Whiteboard />
+            <ScreenShareContainer />
+            <StreamWindowsContainer />
           </Layout>
-          <WidgetContainer />
-          <ToastContainer />
-          <Award />
-          <CameraPreview />
-          <Watermark />
-        </SceneSwitch>
-      </FixedAspectRatioRootBox>
-    </Room>
+          <WhiteboardToolbar />
+          <ScenesController />
+          <Float bottom={15} right={10} align="flex-end" gap={2}>
+            <HandsUpContainer />
+            <Chat />
+          </Float>
+          <DialogContainer />
+          <LoadingContainer />
+        </Layout>
+        <WidgetContainer />
+        <ToastContainer />
+        <Award />
+        <CameraPreview />
+        <Watermark />
+        {/* <div style={{ position: 'absolute', top: '50%', left: '50%' }}>
+          <button onClick={expandPlayerUIStore.openWindow}>Open expand player</button>
+          <button onClick={expandPlayerUIStore.closeWindow}>Close expand player</button>
+        </div> */}
+      </SceneSwitch>
+    </FixedAspectRatioRootBox>
+  );
+};
+
+// class-talk-double
+const ClassTalkDouble = () => {
+  const layoutCls = classnames('edu-room', 'mid-class-room');
+  const { shareUIStore } = useStore();
+  return (
+    <FixedAspectRatioRootBox trackMargin={{ top: shareUIStore.navHeight }}>
+      <SceneSwitch>
+        <Layout className={layoutCls} direction="col">
+          <NavigationBar />
+          <Layout
+            className="fcr-flex-grow fcr-items-stretch fcr-relative fcr-justify-center fcr-room-bg"
+            direction="col">
+            <RoomMidStreamsContainer />
+            <Whiteboard />
+            <ScreenShareContainer />
+            <StreamWindowsContainer />
+          </Layout>
+          <WhiteboardToolbar />
+          <ScenesController />
+          <Float bottom={15} right={10} align="flex-end" gap={2}>
+            <HandsUpContainer />
+            <Chat />
+          </Float>
+          <DialogContainer />
+          <LoadingContainer />
+        </Layout>
+        <WidgetContainer />
+        <ToastContainer />
+        <Award />
+        <CameraPreview />
+        <Watermark />
+      </SceneSwitch>
+    </FixedAspectRatioRootBox>
   );
 };

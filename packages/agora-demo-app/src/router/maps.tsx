@@ -88,18 +88,18 @@ export const commonRoutesMap = {
     component: () => <LaunchWindowPage />,
     exact: true,
   },
-    // alex-classtalk-tag
-    [PageRouter.ClassTalk]: {
-      path: '/class-talk',
-      component: () => <ClassTalk />,
-      exact: false,
-    },
+  // alex-classtalk-tag
+  [PageRouter.ClassTalk]: {
+    path: '/class-talk',
+    component: () => <ClassTalk />,
+    exact: false,
+  },
   // Animation container
   [PageRouter.Index]: {
     path: '/',
     // alex-tag
     // component: () => <Frame />,
-    component: () => <ClassWelcome/>,
+    component: () => <ClassWelcome />,
     exact: false,
   },
 };

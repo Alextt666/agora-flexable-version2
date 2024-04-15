@@ -86,6 +86,9 @@ export const useClasstalkInfo = (props: ClassInfoProps) => {
           setClasstalkName(name);
           const { id: tableId, ...tableInfo } = await getTableInfo({ isDev, id: croomId });
           const agoraParams = await getAgoraData({ isDev, id: tableId });
+          const { role } = agoraParams;
+          // alex-tag-session
+          sessionStorage.setItem('role', role);
           const agoraConfig = compilePath(agoraParams);
           props.onDone({ agoraConfig, tableInfo });
         } catch (e) {

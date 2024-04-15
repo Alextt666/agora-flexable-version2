@@ -18,9 +18,22 @@ function getWindow(id) {
 
 function createBrowserWindow(windowID, queryStr, options) {
   console.log('start create window', windowID);
-  const display =
-    electron.screen.getAllDisplays()[options.openAtScreenIndex] ||
-    electron.screen.getPrimaryDisplay();
+  // const display =
+  //   electron.screen.getAllDisplays()[options.openAtScreenIndex] ||
+  //   electron.screen.getPrimaryDisplay();
+
+  // expand-player
+  const checkDisplayScreen = (windowID) => {
+    const all_screens = electron.screen.getAllDisplays();
+    const primary_screen = electron.screen.getPrimaryDisplay();
+    if (windowID.toString() == 'expand-player' && all_screens.length > 1) {
+      return all_screens.filter((item) => item.id != primary_screen.id)[0];
+    } else {
+      return all_screens[options.openAtScreenIndex] || primary_screen;
+    }
+  };
+  // reset-display-get-method
+  const display = checkDisplayScreen(windowID);
 
   const offsetX = (display.workAreaSize.width - options.width) / 2;
   const offsetY = (display.workAreaSize.height - options.height) / 2;
