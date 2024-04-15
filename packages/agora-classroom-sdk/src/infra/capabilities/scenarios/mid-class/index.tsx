@@ -67,10 +67,6 @@ const AgoraOriginSingle = () => {
         <Award />
         <CameraPreview />
         <Watermark />
-        {/* <div style={{ position: 'absolute', top: '50%', left: '50%' }}>
-          <button onClick={expandPlayerUIStore.openWindow}>Open expand player</button>
-          <button onClick={expandPlayerUIStore.closeWindow}>Close expand player</button>
-        </div> */}
       </SceneSwitch>
     </FixedAspectRatioRootBox>
   );
