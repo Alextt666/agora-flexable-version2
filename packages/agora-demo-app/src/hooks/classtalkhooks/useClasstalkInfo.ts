@@ -81,7 +81,7 @@ export const useClasstalkInfo = (props: ClassInfoProps) => {
       const ipc = window.require('electron').ipcRenderer;
       ipc.on('alex-check-mac-reply', async (_, args) => {
         try {
-          const isDev = true; // 方便调试
+          const isDev = false; // 方便调试
           const { name, id: croomId } = await getClassroomInfo({ isDev, mac: args || '' });
           setClasstalkName(name);
           const { id: tableId, ...tableInfo } = await getTableInfo({ isDev, id: croomId });

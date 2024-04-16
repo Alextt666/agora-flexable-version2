@@ -33,7 +33,7 @@ export const TeacherStream = visibilityControl(
     // expandPlayerUIStore
     const { expandPlayerUIStore } = useStore();
     const screenNum = sessionStorage.getItem('screen');
-    const screenNumLimit = 2;
+    const screenNumLimit = 3;
 
     if (teacherCameraStream && screenNum && +screenNum >= screenNumLimit) {
       expandPlayerUIStore.openWindow();
