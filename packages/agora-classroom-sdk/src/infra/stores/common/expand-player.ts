@@ -49,6 +49,7 @@ export class ExpandPlayerUIStore extends EduUIStoreBase {
     });
   }
   onInstall() {
+    // alex-tag-extends-window-options
     if (EduRteEngineConfig.platform === EduRteRuntimePlatform.Electron) {
       this.shareUIStore.openWindow(WindowID.ExpandPlayer, {
         options: {
