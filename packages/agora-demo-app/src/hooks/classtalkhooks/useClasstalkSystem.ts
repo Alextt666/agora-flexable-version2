@@ -6,14 +6,23 @@ export const useClasstalkSystem = () => {
   const [cameraNum, setCameraNum] = useState<number>(0);
   const [sysMemo, setSysMemo] = useState<number>(0);
   const [sysFreeMemo, setSysFreeMemo] = useState<number>(0);
+  const [rtt, setRtt] = useState<number>(0);
+  const [dl, setDl] = useState<number>(0);
 
   const getUserVideoDevices = async () => {
     const allDevices = await window.navigator.mediaDevices.enumerateDevices();
     const videoDevices = allDevices.filter((device) => device.kind === 'videoinput');
     return videoDevices.length;
   };
-
+  const networkInfo = () => {
+    //@ts-ignore
+    const network = window.navigator?.connection;
+    if (!network) return;
+    setRtt(network.rtt);
+    setDl(network.downlink);
+  };
   useEffect(() => {
+    networkInfo();
     if (window.require('electron')) {
       const ipc = window.require('electron').ipcRenderer;
       getUserVideoDevices().then((num) => setCameraNum(num));
@@ -40,5 +49,5 @@ export const useClasstalkSystem = () => {
       });
     }
   }, []);
-  return [screenNum, cameraNum, sysMemo, sysFreeMemo];
+  return [screenNum, cameraNum, sysMemo, sysFreeMemo, dl, rtt];
 };
