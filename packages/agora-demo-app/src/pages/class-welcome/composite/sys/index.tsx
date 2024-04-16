@@ -6,7 +6,7 @@ const SystemInfo = () => {
   return (
     <div className="sys-shadow fcr-p-4 fcr-flex fcr-flex-col">
       <div className="fcr-text-white fcr-font-bold fcr-text-lg">{SysInfoText.sysTitle}</div>
-      <div className="fcr-text-white fcr-flex fcr-flex-col fcr-justify-evenly fcr-items-start fcr-mt-4 fcr-flex-1">
+      <div className="fcr-text-white fcr-flex fcr-flex-col fcr-justify-evenly fcr-items-start fcr-mt-4 fcr-ml-2 fcr-flex-1">
         <p>
           {`${SysInfoText.smText}${SysInfoText.semoChar}`}{' '}
           {new Array(screenNum).fill(0).map((_, index) => (
@@ -16,6 +16,11 @@ const SystemInfo = () => {
         <p>
           {`${SysInfoText.netText}${SysInfoText.semoChar}`}
           <ImageIcon className="fcr-inline-block fcr-ml-4" iconSrc={WifiIcon} />
+          <span
+          className='fcr-ml-2'
+            style={{ transform: 'translateY(5px)', display: 'inline-block', fontSize: '10px' }}>
+            {'RTT-50 DL-10M/s'}
+          </span>
         </p>
         <p>
           {`${SysInfoText.cmText}${SysInfoText.semoChar}`}{' '}

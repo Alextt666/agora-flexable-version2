@@ -32,7 +32,10 @@ export const TeacherStream = visibilityControl(
     // alex-tag
     // expandPlayerUIStore
     const { expandPlayerUIStore } = useStore();
-    if (teacherCameraStream) {
+    const screenNum = sessionStorage.getItem('screen');
+    const screenNumLimit = 2;
+
+    if (teacherCameraStream && screenNum && +screenNum >= screenNumLimit) {
       expandPlayerUIStore.openWindow();
     }
 

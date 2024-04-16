@@ -19,24 +19,14 @@ import { WidgetContainer } from '../../containers/widget';
 import { Chat, Watermark, Whiteboard } from '../../containers/widget/slots';
 import { StreamWindowsContainer } from '../../containers/stream-window';
 import CameraPreview from '../../containers/camera-preview';
-import { useEffect, useState } from 'react';
 
 export const MidClassScenario = () => {
-  const [isSingle, setIsSingle] = useState<boolean>(false);
-  // Screen-Num-Config-alex-tag
-  const screenNumLimit = 2;
-  useEffect(() => {
-    // const role = sessionStorage.getItem('role');
-    const screenNum = sessionStorage.getItem('screen');
-    if (screenNum && +screenNum >= screenNumLimit) {
-      setIsSingle(false);
-    }
-  });
-  return <Room>{isSingle ? <AgoraOriginSingle /> : <ClassTalkDouble />}</Room>;
+  const role = sessionStorage.getItem('role');
+  return <Room>{role == '1' ? <AgoraClassRoom /> : <ClassTalkRoom />}</Room>;
 };
 
-// Agora-origin-single
-const AgoraOriginSingle = () => {
+// agora-class-room
+const AgoraClassRoom = () => {
   // layout
   const layoutCls = classnames('edu-room', 'mid-class-room');
   const { shareUIStore } = useStore();
@@ -72,8 +62,9 @@ const AgoraOriginSingle = () => {
   );
 };
 
-// class-talk-double
-const ClassTalkDouble = () => {
+// classtalk-class-room
+const ClassTalkRoom = () => {
+  // layout
   const layoutCls = classnames('edu-room', 'mid-class-room');
   const { shareUIStore } = useStore();
   return (
