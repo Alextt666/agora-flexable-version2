@@ -10,9 +10,9 @@ const compilePath = (agoraParams: AgoraParams) => {
   const course = hasCourseWareList(agoraProjectTask);
   return {
     appId: '272b35eccc3848248d08a3a8ccc73b84',
-    userUuid: id.toString(),
+    userUuid: `${id}`,
     rtmToken: decodeURIComponent(userToken),
-    roomUuid: talkCloudId,
+    roomUuid: `${talkCloudId}`,
     roomName: decodeURI(roomName),
     userName: decodeURI(schoolName),
     roleType: +role,

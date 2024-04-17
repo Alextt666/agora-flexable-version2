@@ -5,6 +5,7 @@ import type { InClassTalkConfig, TableInfo, AgoraConfig, TableInfoProps } from '
 import { useHistory } from 'react-router';
 import { useState, useContext } from 'react';
 import { GlobalStoreContext } from '@app/stores';
+import { checkBrowserDevice } from '@app/utils/browser';
 import './index.css';
 import NoClass from '@app/assets/classtalk/noclass.svg';
 
@@ -18,9 +19,21 @@ export const ClassWelcome = observer(() => {
     setTableConfig(params.tableInfo);
     setAgoraLaunchConfig(params.agoraConfig);
   };
+  const webRTCCodec = 'vp8';
   const handleEnter = () => {
+    const config = {
+      platform: checkBrowserDevice(),
+      duration: 45 * 60,
+      mediaOptions: {
+        web: {
+          codec: webRTCCodec,
+        },
+        screenShareEncoderConfiguration: undefined,
+      },
+    };
+    console.log({ language, region, ...config, ...agoraLaunchConfig },'All-config')
     //@ts-ignore
-    setLaunchConfig({ language, region, ...agoraLaunchConfig });
+    setLaunchConfig({ language, region, ...config, ...agoraLaunchConfig });
     history.push('/launch');
   };
   return (
@@ -28,7 +41,7 @@ export const ClassWelcome = observer(() => {
       <ClasstalkInfo onDone={(params: InClassTalkConfig) => handleFetchDone(params)} />
       <div className=" fcr-w-full fcr-flex fcr-justify-center">
         <div className="classtalk-content fcr-w-7/12">
-          <div className='regular-class fcr-flex fcr-flex-col'>
+          <div className="regular-class fcr-flex fcr-flex-col">
             <div className="fcr-p-4 fcr-text-white fcr-font-bold fcr-text-lg">今日课程</div>
             {tableConfig ? (
               <InterItem tableConfig={tableConfig} onEnter={handleEnter} />
