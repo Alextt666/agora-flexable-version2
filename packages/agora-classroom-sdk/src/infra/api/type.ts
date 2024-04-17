@@ -30,7 +30,6 @@ export type ListenerCallback = (evt: AgoraEduClassroomEvent, ...args: unknown[])
 export enum WindowID {
   Main = 'main',
   VideoGallery = 'video-gallery',
-  ExpandPlayer = 'expand-player',
 }
 
 export type LanguageEnum = 'en' | 'zh';
