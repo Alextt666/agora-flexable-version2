@@ -57,6 +57,7 @@ export class ExpandPlayerUIStore extends EduUIStoreBase {
           height: 360,
           minWidth: 600,
           minHeight: 360,
+          fullscreen: true,
           show: false,
           allowRendererProcessReuse: false,
           preventClose: true,

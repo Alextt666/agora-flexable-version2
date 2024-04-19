@@ -19,7 +19,7 @@ type FixedAspectRatioProps = {
 
 const FixedAspectRatioContainer: React.FC<FixedAspectRatioProps> = observer(
   ({ children, minimumWidth = 0, minimumHeight = 0 }) => {
-    const style = useClassroomStyle({ minimumHeight, minimumWidth });
+    const style = { ...useClassroomStyle({ minimumHeight, minimumWidth }), width: '100vw' };
 
     const { shareUIStore } = useStore();
 
