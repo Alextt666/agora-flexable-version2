@@ -64,6 +64,7 @@ function createBrowserWindow(windowID, queryStr, options) {
     minHeight: options.minHeight,
     maxWidth: options.maxWidth,
     maxHeight: options.maxHeight,
+    autoHideMenuBar:true,
     // useContentSize: options.useContentSize ?? false,
     // center: options.center ?? true,
     webPreferences: {

@@ -84,6 +84,7 @@ export const useClasstalkInfo = (props: ClassInfoProps) => {
           const isDev = false; // 方便调试
           const { name, id: croomId } = await getClassroomInfo({ isDev, mac: args || '' });
           setClasstalkName(name);
+          aMessage.loading('获取课表信息...');
           const { id: tableId, ...tableInfo } = await getTableInfo({ isDev, id: croomId });
           const agoraParams = await getAgoraData({ isDev, id: tableId });
           const { role } = agoraParams;

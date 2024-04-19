@@ -13,6 +13,7 @@ import { EduUIStoreBase } from './base';
 import { NotificationUIStore } from './notification';
 import { StreamWindowUIStore } from './stream-window';
 import { PretestUIStore } from './pretest';
+import { ExpandPlayerUIStore } from './expand-player';
 import {
   AGServiceErrorCode,
   EduClassroomConfig,
@@ -29,6 +30,7 @@ import { transI18n } from 'agora-common-libs';
 import { Getters } from './getters';
 
 export class EduClassroomUIStore {
+  protected _expandPlayerUIStore: ExpandPlayerUIStore;
   protected _classroomStore: EduClassroomStore;
   protected _boardUIStore: BoardUIStore;
   protected _shareUIStore: EduShareUIStore;
@@ -54,6 +56,7 @@ export class EduClassroomUIStore {
     this._classroomStore = store;
     this._getters = new Getters(this);
     this._shareUIStore = new EduShareUIStore();
+    this._expandPlayerUIStore = new ExpandPlayerUIStore(store, this.shareUIStore, this._getters);
     this._boardUIStore = new BoardUIStore(store, this.shareUIStore, this._getters);
     this._cloudUIStore = new CloudUIStore(store, this.shareUIStore, this._getters);
     this._streamUIStore = new StreamUIStore(store, this.shareUIStore, this._getters);
@@ -75,6 +78,9 @@ export class EduClassroomUIStore {
   /**
    * getters
    */
+  get expandPlayerUIStore() {
+    return this._expandPlayerUIStore;
+  }
   get classroomStore() {
     return this._classroomStore;
   }
