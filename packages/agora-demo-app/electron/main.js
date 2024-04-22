@@ -26,7 +26,8 @@ const createMainWindow = function () {
     height: realSize.height,
     center: true,
     resizable: true,
-
+    // alex-tag-main-window-config
+    fullscreen: true,
     // fullscreen: false,// Whether the window should show in fullscreen. When explicitly set to false the fullscreen button will be hidden or disabled on macOS. Default is false.
 
     // show: true,
