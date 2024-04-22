@@ -28,10 +28,22 @@ export const ClassWelcome = observer(() => {
         web: {
           codec: webRTCCodec,
         },
+        cameraEncoderConfiguration: {
+          width: 1280,
+          height: 720,
+          frameRate: 30,
+          bitrate: 1710,
+        },
+        lowStreamCameraEncoderConfiguration: {
+          width: 1280,
+          height: 720,
+          frameRate: 30,
+          bitrate: 1710,
+        },
         screenShareEncoderConfiguration: undefined,
       },
     };
-    console.log({ language, region, ...config, ...agoraLaunchConfig },'All-config')
+    console.log({ language, region, ...config, ...agoraLaunchConfig }, 'All-config');
     //@ts-ignore
     setLaunchConfig({ language, region, ...config, ...agoraLaunchConfig });
     history.push('/launch');

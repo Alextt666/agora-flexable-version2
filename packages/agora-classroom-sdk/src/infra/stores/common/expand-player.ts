@@ -38,7 +38,7 @@ export class ExpandPlayerUIStore extends EduUIStoreBase {
   };
   private _updatePlayerInfo() {
     const stream = this.getters.teacherCameraStream;
-    console.log('send message');
+    console.log(`alex-extend-update-${JSON.stringify(stream)}- isLocal - ${stream.isLocal}`);
     sendToRendererProcess(WindowID.ExpandPlayer, ChannelType.Message, {
       type: 'teacherStreamUpdated',
       payload: {
