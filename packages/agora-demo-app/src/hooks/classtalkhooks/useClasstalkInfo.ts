@@ -95,6 +95,8 @@ export const useClasstalkInfo = (props: ClassInfoProps) => {
         } catch (e) {
           console.log(new Error(`IPCError - IPC | Parse Error - ${e}`));
           aMessage.error('获取课表信息失败，请刷新重试');
+        } finally {
+          aMessage.destroy();
         }
       });
       ipc.send('alex-check-mac', 'main', 'alex');
