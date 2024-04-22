@@ -79,12 +79,16 @@ export const useClasstalkInfo = (props: ClassInfoProps) => {
     // alex-tag
     if (window?.require) {
       const ipc = window.require('electron').ipcRenderer;
+      const MessageKey = Math.floor(Math.random() * 10000);
       ipc.on('alex-check-mac-reply', async (_, args) => {
         try {
+          aMessage.loading({
+            content: '获取课表信息...',
+            key: MessageKey,
+          });
           const isDev = false; // 方便调试
           const { name, id: croomId } = await getClassroomInfo({ isDev, mac: args || '' });
           setClasstalkName(name);
-          aMessage.loading('获取课表信息...');
           const { id: tableId, ...tableInfo } = await getTableInfo({ isDev, id: croomId });
           const agoraParams = await getAgoraData({ isDev, id: tableId });
           const { role } = agoraParams;
@@ -96,7 +100,7 @@ export const useClasstalkInfo = (props: ClassInfoProps) => {
           console.log(new Error(`IPCError - IPC | Parse Error - ${e}`));
           aMessage.error('获取课表信息失败，请刷新重试');
         } finally {
-          aMessage.destroy();
+          aMessage.destroy(MessageKey);
         }
       });
       ipc.send('alex-check-mac', 'main', 'alex');
