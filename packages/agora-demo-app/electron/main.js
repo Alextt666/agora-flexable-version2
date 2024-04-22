@@ -207,7 +207,7 @@ const createMainWindow = function () {
 
   if (platform === 'win32') {
     _mainWindow.setMenu(menu);
-    // _mainWindow.setAutoHideMenuBar(true);
+    _mainWindow.setAutoHideMenuBar(true);
   }
 
   ipcMain.on('close', () => {
