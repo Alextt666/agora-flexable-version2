@@ -33,11 +33,15 @@ export const Whiteboard = observer(function Board() {
   const { boardUIStore } = useStore();
 
   const { isCopying } = boardUIStore;
-
+  // alex-tag-white-board
+  const role = sessionStorage.getItem('role');
   return (
     <React.Fragment>
       <div
-        style={{ height: boardUIStore.boardAreaHeight, zIndex: ComponentLevelRules.WhiteBoard }}
+        style={{
+          height: `${role == '1' ? boardUIStore.boardAreaHeight : '100vh'}`,
+          zIndex: ComponentLevelRules.WhiteBoard,
+        }}
         className="widget-slot-board"
       />
       {isCopying && <Spinner />}
@@ -84,7 +88,10 @@ export const WhiteboardMobile = observer(function Board() {
   const height = mounted && !isLandscape ? boardContainerHeight : 0;
   return (
     <div
-      className={classnames('whiteboard-mobile-container fcr-w-full fcr-relative', containerH5VisibleCls)}
+      className={classnames(
+        'whiteboard-mobile-container fcr-w-full fcr-relative',
+        containerH5VisibleCls,
+      )}
       style={{
         height: height,
         width: boardContainerWidth,
