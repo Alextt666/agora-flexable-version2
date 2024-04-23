@@ -791,10 +791,10 @@ export class NavigationBarUIStore extends EduUIStoreBase {
   async startClass() {
     try {
       // alex-tag
-      // console.log('start-class');
-      // const domain = classtalkDomain({ isDev });
-      // const tableId = sessionStorage.getItem('tableId') || '66';
-      // await fetch(`${domain}/api/agora/courseBegin/${tableId}`);
+      console.log('start-class');
+      const domain = classtalkDomain({ isDev });
+      const tableId = sessionStorage.getItem('tableId') || '66';
+      await fetch(`${domain}/api/agora/courseBegin/${tableId}`);
       await this.classroomStore.roomStore.updateClassState(ClassState.ongoing);
     } catch (e) {
       this.shareUIStore.addGenericErrorDialog(e as AGError);
