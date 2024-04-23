@@ -35,11 +35,13 @@ export const Whiteboard = observer(function Board() {
   const { isCopying } = boardUIStore;
   // alex-tag-white-board
   const role = sessionStorage.getItem('role');
+  console.log(boardUIStore.boardAreaHeight, 'boardUIStore.boardAreaHeight');
+  const LOCAL_HEIGHT = role == '1' ? `${Math.ceil(boardUIStore.boardAreaHeight)}px` : '100vh';
   return (
     <React.Fragment>
       <div
         style={{
-          height: `${role == '1' ? boardUIStore.boardAreaHeight : '100vh'}`,
+          height: LOCAL_HEIGHT,
           zIndex: ComponentLevelRules.WhiteBoard,
         }}
         className="widget-slot-board"

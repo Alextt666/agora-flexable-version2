@@ -366,7 +366,7 @@ export class CloudUIStore extends EduUIStoreBase {
       resourceHasAnimation: resource.hasAnimation,
     });
     //@ts-ignore
-    window.__webpack_modules__.setMaximized(true);
+    window._wm.setMaximized(true);
   }
 
   /**
