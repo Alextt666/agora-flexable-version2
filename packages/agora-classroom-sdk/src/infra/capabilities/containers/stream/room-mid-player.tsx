@@ -12,10 +12,14 @@ export const RoomMidStreamsContainer = observer(() => {
 
   const { stageVisible } = streamUIStore;
 
+  const role = sessionStorage.getItem('role');
+
   return (
     <div
       id="stage-container"
-      className={`fcr-w-full fcr-flex-grow fcr-flex-shrink-0 ${stageVisible ? '' : 'fcr-hidden'}`}>
+      className={`fcr-w-full fcr-flex-grow fcr-flex-shrink-0 ${
+        stageVisible && role == '1' ? '' : 'fcr-hidden'
+      }`}>
       <div className="fcr-h-full fcr-flex fcr-justify-center fcr-items-center fcr-relative">
         <TeacherStream />
         <StudentStreams />

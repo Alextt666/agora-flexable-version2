@@ -21,80 +21,39 @@ import { StreamWindowsContainer } from '../../containers/stream-window';
 import CameraPreview from '../../containers/camera-preview';
 
 export const MidClassScenario = () => {
-  const role = sessionStorage.getItem('role');
-  return <Room>{role == '1' ? <AgoraClassRoom /> : <ClassTalkRoom />}</Room>;
-};
-
-// agora-class-room
-const AgoraClassRoom = () => {
   // layout
   const layoutCls = classnames('edu-room', 'mid-class-room');
   const { shareUIStore } = useStore();
   return (
-    <FixedAspectRatioRootBox trackMargin={{ top: shareUIStore.navHeight }}>
-      <SceneSwitch>
-        <Layout className={layoutCls} direction="col">
-          <NavigationBar />
-          <Layout
-            className="fcr-flex-grow fcr-items-stretch fcr-relative fcr-justify-center fcr-room-bg"
-            direction="col">
-            <RoomMidStreamsContainer />
-            <Whiteboard />
-            <ScreenShareContainer />
-            <StreamWindowsContainer />
+    <Room>
+      <FixedAspectRatioRootBox trackMargin={{ top: shareUIStore.navHeight }}>
+        <SceneSwitch>
+          <Layout className={layoutCls} direction="col">
+            <NavigationBar />
+            <Layout
+              className="fcr-flex-grow fcr-items-stretch fcr-relative fcr-justify-center fcr-room-bg"
+              direction="col">
+              <RoomMidStreamsContainer />
+              <Whiteboard />
+              <ScreenShareContainer />
+              <StreamWindowsContainer />
+            </Layout>
+            <WhiteboardToolbar />
+            <ScenesController />
+            <Float bottom={15} right={10} align="flex-end" gap={2}>
+              <HandsUpContainer />
+              <Chat />
+            </Float>
+            <DialogContainer />
+            <LoadingContainer />
           </Layout>
-          <WhiteboardToolbar />
-          <ScenesController />
-          <Float bottom={15} right={10} align="flex-end" gap={2}>
-            <HandsUpContainer />
-            <Chat />
-          </Float>
-          <DialogContainer />
-          <LoadingContainer />
-        </Layout>
-        <WidgetContainer />
-        <ToastContainer />
-        <Award />
-        <CameraPreview />
-        <Watermark />
-      </SceneSwitch>
-    </FixedAspectRatioRootBox>
-  );
-};
-
-// classtalk-class-room
-const ClassTalkRoom = () => {
-  // layout
-  const layoutCls = classnames('edu-room', 'mid-class-room');
-  const { shareUIStore } = useStore();
-  return (
-    <FixedAspectRatioRootBox trackMargin={{ top: shareUIStore.navHeight }}>
-      <SceneSwitch>
-        <Layout className={layoutCls} direction="col">
-          <NavigationBar />
-          <Layout
-            className="fcr-flex-grow fcr-items-stretch fcr-relative fcr-justify-center fcr-room-bg"
-            direction="col">
-            <RoomMidStreamsContainer />
-            <Whiteboard />
-            <ScreenShareContainer />
-            <StreamWindowsContainer />
-          </Layout>
-          <WhiteboardToolbar />
-          <ScenesController />
-          <Float bottom={15} right={10} align="flex-end" gap={2}>
-            <HandsUpContainer />
-            <Chat />
-          </Float>
-          <DialogContainer />
-          <LoadingContainer />
-        </Layout>
-        <WidgetContainer />
-        <ToastContainer />
-        <Award />
-        <CameraPreview />
-        <Watermark />
-      </SceneSwitch>
-    </FixedAspectRatioRootBox>
+          <WidgetContainer />
+          <ToastContainer />
+          <Award />
+          <CameraPreview />
+          <Watermark />
+        </SceneSwitch>
+      </FixedAspectRatioRootBox>
+    </Room>
   );
 };

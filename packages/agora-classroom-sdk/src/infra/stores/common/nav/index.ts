@@ -30,6 +30,13 @@ import { NetworkStateColors } from '@classroom/ui-kit/utilities/state-color';
 import { EduUIStoreBase } from '../base';
 import { DialogCategory } from '../share';
 
+// alex-tag
+const isDev = true;
+const classtalkDomain = ({ isDev }: { isDev: boolean }) => {
+  const domain = isDev ? 'http://192.168.1.37:8080' : 'https://gateway.classkid.net';
+  return domain;
+};
+
 export interface EduNavAction<P = undefined> {
   id: 'Record' | 'AskForHelp' | 'Settings' | 'Exit' | 'Camera' | 'Mic' | 'Share';
   title: string;
@@ -168,10 +175,16 @@ export class NavigationBarUIStore extends EduUIStoreBase {
       iconType: SvgIconEnum.EXIT,
       onClick: async () => {
         this.shareUIStore.addDialog(DialogCategory.Quit, {
-          onOk: (back: boolean) => {
+          onOk: async (back: boolean) => {
             if (back) {
               this._leaveSubRoom();
             } else {
+              if (EduClassroomConfig.shared.sessionInfo.role === EduRoleTypeEnum.teacher) {
+                //alex-tag
+                const domain = classtalkDomain({ isDev });
+                const tableId = sessionStorage.getItem('tableId') || '66';
+                await fetch(`${domain}/api/agora/courseOver/${tableId}`);
+              }
               this.classroomStore.connectionStore.leaveClassroom(LeaveReason.leave);
             }
           },
@@ -777,6 +790,11 @@ export class NavigationBarUIStore extends EduUIStoreBase {
   @bound
   async startClass() {
     try {
+      // alex-tag
+      // console.log('start-class');
+      // const domain = classtalkDomain({ isDev });
+      // const tableId = sessionStorage.getItem('tableId') || '66';
+      // await fetch(`${domain}/api/agora/courseBegin/${tableId}`);
       await this.classroomStore.roomStore.updateClassState(ClassState.ongoing);
     } catch (e) {
       this.shareUIStore.addGenericErrorDialog(e as AGError);

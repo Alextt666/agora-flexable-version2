@@ -86,10 +86,15 @@ export const useClasstalkInfo = (props: ClassInfoProps) => {
             content: '获取课表信息...',
             key: MessageKey,
           });
-          const isDev = false; // 方便调试
+          const isDev = true; // 方便调试
           const { name, id: croomId } = await getClassroomInfo({ isDev, mac: args || '' });
           setClasstalkName(name);
-          const { id: tableId, ...tableInfo } = await getTableInfo({ isDev, id: croomId });
+          const {
+            id: tableId,
+            timetableId,
+            ...tableInfo
+          } = await getTableInfo({ isDev, id: croomId });
+          sessionStorage.setItem('tableId', timetableId);
           const agoraParams = await getAgoraData({ isDev, id: tableId });
           const { role } = agoraParams;
           // alex-tag-session

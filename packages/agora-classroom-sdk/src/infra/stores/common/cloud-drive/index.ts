@@ -365,6 +365,8 @@ export class CloudUIStore extends EduUIStoreBase {
       taskUuid: resource.taskUuid,
       resourceHasAnimation: resource.hasAnimation,
     });
+    //@ts-ignore
+    window.__webpack_modules__.setMaximized(true);
   }
 
   /**
