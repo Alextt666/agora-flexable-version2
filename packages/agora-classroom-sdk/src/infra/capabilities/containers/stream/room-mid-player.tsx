@@ -35,7 +35,7 @@ export const TeacherStream = visibilityControl(
     const style = {
       marginRight: gap - 2,
     };
-    const screenLimit = 2;
+    const screenLimit = 3;
     const checkScreen = () => {
       const screenNum = sessionStorage.getItem('screen');
       if (screenNum && +screenNum >= screenLimit) return true;
