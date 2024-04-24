@@ -86,7 +86,7 @@ export const useClasstalkInfo = (props: ClassInfoProps) => {
             content: '获取课表信息...',
             key: MessageKey,
           });
-          const isDev = true; // 方便调试
+          const isDev = false; // 方便调试
           const { name, id: croomId } = await getClassroomInfo({ isDev, mac: args || '' });
           setClasstalkName(name);
           const {

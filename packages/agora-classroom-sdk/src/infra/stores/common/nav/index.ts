@@ -31,9 +31,9 @@ import { EduUIStoreBase } from '../base';
 import { DialogCategory } from '../share';
 
 // alex-tag
-const isDev = true;
-const classtalkDomain = ({ isDev }: { isDev: boolean }) => {
-  const domain = isDev ? 'http://192.168.1.37:8080' : 'https://gateway.classkid.net';
+const isDevc = false;
+const classtalkDomain = ({ isDevc }: { isDevc: boolean }) => {
+  const domain = isDevc ? 'http://192.168.1.37:8080' : 'https://gateway.classkid.net';
   return domain;
 };
 
@@ -181,7 +181,7 @@ export class NavigationBarUIStore extends EduUIStoreBase {
             } else {
               if (EduClassroomConfig.shared.sessionInfo.role === EduRoleTypeEnum.teacher) {
                 //alex-tag
-                const domain = classtalkDomain({ isDev });
+                const domain = classtalkDomain({ isDevc });
                 const tableId = sessionStorage.getItem('tableId') || '66';
                 await fetch(`${domain}/api/agora/courseOver/${tableId}`);
               }
@@ -792,7 +792,7 @@ export class NavigationBarUIStore extends EduUIStoreBase {
     try {
       // alex-tag
       console.log('start-class');
-      const domain = classtalkDomain({ isDev });
+      const domain = classtalkDomain({ isDevc });
       const tableId = sessionStorage.getItem('tableId') || '66';
       await fetch(`${domain}/api/agora/courseBegin/${tableId}`);
       await this.classroomStore.roomStore.updateClassState(ClassState.ongoing);
