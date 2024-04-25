@@ -7,18 +7,23 @@ import { visibilityControl, studentVideoEnabled, teacherVideoEnabled } from 'ago
 import { DragableStream } from './draggable-stream';
 import { useStore } from '@classroom/infra/hooks/ui-store';
 
+// alex-tag
+const role = sessionStorage.getItem('role');
+const screenLimit = 2;
+const checkScreen = () => {
+  const screenNum = sessionStorage.getItem('screen');
+  if (screenNum && +screenNum >= screenLimit) return true;
+  return false;
+};
+
 export const RoomMidStreamsContainer = observer(() => {
   const { streamUIStore } = useInteractiveUIStores() as EduInteractiveUIClassStore;
-
   const { stageVisible } = streamUIStore;
-
-  const role = sessionStorage.getItem('role');
-
   return (
     <div
       id="stage-container"
       className={`fcr-w-full fcr-flex-grow fcr-flex-shrink-0 ${
-        stageVisible && role == '1' ? '' : 'fcr-hidden'
+        stageVisible && role == '1' ? '' : checkScreen() ? 'fcr-hidden' : ''
       }`}>
       <div className="fcr-h-full fcr-flex fcr-justify-center fcr-items-center fcr-relative">
         <TeacherStream />
@@ -35,12 +40,7 @@ export const TeacherStream = visibilityControl(
     const style = {
       marginRight: gap - 2,
     };
-    const screenLimit = 3;
-    const checkScreen = () => {
-      const screenNum = sessionStorage.getItem('screen');
-      if (screenNum && +screenNum >= screenLimit) return true;
-      return false;
-    };
+
     if (teacherCameraStream && checkScreen()) {
       const { expandPlayerUIStore } = useStore();
       expandPlayerUIStore.openWindow();
