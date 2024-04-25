@@ -76,11 +76,11 @@ export const ClassTalk = observer(() => {
   // effect submit
   const Enter = () => {
     // classtalk token flag
-    interface ICOptions{
-      [key:string]:string
+    interface ICOptions {
+      [key: string]: string;
     }
     const optionsStr = location.search.slice(1).split('&');
-    const options:ICOptions = {};
+    const options: ICOptions = {};
     optionsStr.forEach((item) => {
       const [key, value] = item.split('=');
       options[`${key}`] = value;
@@ -127,6 +127,8 @@ export const ClassTalk = observer(() => {
         taskId,
       }),
     };
+    // save talkCloudId
+    sessionStorage.setItem('tableId', talkCloudId);
     //@ts-ignore
     setLaunchConfig(config);
     history.push('/launch');
