@@ -111,7 +111,7 @@ export const AgoraClassroomApp = () => {
         // courseWareList,
         uiMode: homeStore.theme,
         language: homeStore.language,
-        pretest: needPretest,
+        // pretest: needPretest,
         virtualBackgroundImages,
         virtualBackgroundVideos,
         listener: (evt: AgoraEduClassroomEvent, type) => {

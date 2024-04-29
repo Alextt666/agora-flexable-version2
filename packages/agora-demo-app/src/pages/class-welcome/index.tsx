@@ -43,9 +43,15 @@ export const ClassWelcome = observer(() => {
         screenShareEncoderConfiguration: undefined,
       },
     };
-    console.log({ language, region, ...config, ...agoraLaunchConfig }, 'All-config');
+    let pretest = false;
+    // 登陆过
+    if (!localStorage.getItem('pretest')) {
+      localStorage.setItem('pretest', 'true');
+      pretest = true;
+    }
+    console.log({ language, region, pretest, ...config, ...agoraLaunchConfig }, 'All-config');
     //@ts-ignore
-    setLaunchConfig({ language, region, ...config, ...agoraLaunchConfig });
+    setLaunchConfig({ language, region, pretest, ...config, ...agoraLaunchConfig });
     history.push('/launch');
   };
   return (

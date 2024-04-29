@@ -36,11 +36,12 @@ export const Whiteboard = observer(function Board() {
   // alex-tag-white-board
   const role = sessionStorage.getItem('role');
   console.log(boardUIStore.boardAreaHeight, 'boardUIStore.boardAreaHeight');
-  const LOCAL_HEIGHT = role == '1' ? `${Math.ceil(boardUIStore.boardAreaHeight)}px` : '100vh';
+  const LOCAL_HEIGHT = role == '1' ? `${Math.ceil(boardUIStore.boardAreaHeight)}px` : '100vh'; // electron version
   return (
     <React.Fragment>
       <div
         style={{
+          // height: boardUIStore.boardAreaHeight,  // web version
           height: LOCAL_HEIGHT,
           zIndex: ComponentLevelRules.WhiteBoard,
         }}
