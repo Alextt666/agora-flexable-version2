@@ -5,7 +5,7 @@ const IPCDelegate = require('./base');
 const { URLSearchParams } = require('url');
 const { Mutex } = require('./mutex');
 
-// alex-tag
+// alex-tag-window-system-info
 const { checkMac, checkSys } = require('./alex-utils');
 
 const windowStateMap = {};
@@ -299,7 +299,7 @@ function addListeners() {
       }
     }
   });
-  // alex-tag
+  // alex-tag-check-mac
   delegate.on('alex-check-mac', (e, args) => {
     console.log(args, 'args');
     const mac = checkMac();

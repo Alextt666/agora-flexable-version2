@@ -81,7 +81,7 @@ export const getAppDomain = (region = 'CN' as EduRegion) => {
   return domain;
 };
 
-// alex-tag
+// alex-tag-domain-fe
 export const classtalkDomain = ({ isDev }: { isDev: boolean }) => {
   const domain = isDev ? 'http://192.168.1.37:8080' : 'https://gateway.classkid.net';
   return domain;

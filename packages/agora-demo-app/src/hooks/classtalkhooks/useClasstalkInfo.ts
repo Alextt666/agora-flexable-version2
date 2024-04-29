@@ -76,7 +76,7 @@ const hasCourseWareList = (options: IHasCourseWareList) => {
 export const useClasstalkInfo = (props: ClassInfoProps) => {
   const [classtalkName, setClasstalkName] = useState<string>('');
   useEffect(() => {
-    // alex-tag
+    // alex-tag-check-mac-fe
     if (window?.require) {
       const ipc = window.require('electron').ipcRenderer;
       const MessageKey = Math.floor(Math.random() * 10000);
@@ -97,7 +97,7 @@ export const useClasstalkInfo = (props: ClassInfoProps) => {
           sessionStorage.setItem('tableId', timetableId);
           const agoraParams = await getAgoraData({ isDev, id: tableId });
           const { role } = agoraParams;
-          // alex-tag-session
+          // alex-tag-session-set-role
           sessionStorage.setItem('role', role);
           const agoraConfig = compilePath(agoraParams);
           props.onDone({ agoraConfig, tableInfo });

@@ -7,7 +7,7 @@ import { visibilityControl, studentVideoEnabled, teacherVideoEnabled } from 'ago
 import { DragableStream } from './draggable-stream';
 import { useStore } from '@classroom/infra/hooks/ui-store';
 
-// alex-tag
+// alex-tag-screennum-check
 const role = sessionStorage.getItem('role');
 const screenLimit = 2;
 const checkScreen = () => {

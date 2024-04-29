@@ -97,7 +97,7 @@ export const commonRoutesMap = {
   // Animation container
   [PageRouter.Index]: {
     path: '/',
-    // alex-tag
+    // alex-tag-routes-welcome
     // component: () => <Frame />,
     component: () => <ClassWelcome />,
     exact: false,

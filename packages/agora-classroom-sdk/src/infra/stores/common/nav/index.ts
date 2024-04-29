@@ -30,7 +30,7 @@ import { NetworkStateColors } from '@classroom/ui-kit/utilities/state-color';
 import { EduUIStoreBase } from '../base';
 import { DialogCategory } from '../share';
 
-// alex-tag
+// alex-tag-sdk-domain
 const isDevc = false;
 const classtalkDomain = ({ isDevc }: { isDevc: boolean }) => {
   const domain = isDevc ? 'http://192.168.1.37:8080' : 'https://gateway.classkid.net';
@@ -180,7 +180,7 @@ export class NavigationBarUIStore extends EduUIStoreBase {
               this._leaveSubRoom();
             } else {
               if (EduClassroomConfig.shared.sessionInfo.role === EduRoleTypeEnum.teacher) {
-                //alex-tag
+                //alex-tag-fetch-class-over
                 const domain = classtalkDomain({ isDevc });
                 const tableId = sessionStorage.getItem('tableId') || '66';
                 await fetch(`${domain}/api/agora/courseOver/${tableId}`);
@@ -790,7 +790,7 @@ export class NavigationBarUIStore extends EduUIStoreBase {
   @bound
   async startClass() {
     try {
-      // alex-tag
+      // alex-tag-fetch-class-begin
       console.log('start-class');
       const domain = classtalkDomain({ isDevc });
       const tableId = sessionStorage.getItem('tableId') || '66';
