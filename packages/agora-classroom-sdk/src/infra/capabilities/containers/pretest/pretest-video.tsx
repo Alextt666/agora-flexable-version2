@@ -154,6 +154,10 @@ const VideoDeviceList = observer(() => {
           value: value.value,
         }))}
         onChange={(value) => {
+          // alex-set-video-config-defualt
+          console.log(cameraDevicesList, 'cameraDevicesList');
+          console.log(value, 'current-device-value');
+          localStorage.setItem('video-value', JSON.stringify(value));
           setCameraDevice(value);
         }}
       />
