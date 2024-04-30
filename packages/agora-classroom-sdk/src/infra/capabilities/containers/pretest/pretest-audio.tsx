@@ -61,7 +61,7 @@ const MicrophoneTest = observer(() => {
             value: value.value,
           }))}
           onChange={(value) => {
-            // alex-set-audio-config-defualt
+            // alex-tag-set-audio-config-defualt
             localStorage.setItem('audio-value', JSON.stringify(value));
             setRecordingDevice(value);
             setUserHasSelectedAudioRecordingDevice();
