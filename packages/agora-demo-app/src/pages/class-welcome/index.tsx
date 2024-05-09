@@ -54,13 +54,6 @@ export const ClassWelcome = observer(() => {
     setLaunchConfig({ language, region, pretest, ...config, ...agoraLaunchConfig });
     history.push('/launch');
   };
-  // 自动加入机制
-  // Tz项目临时
-  useEffect(() => {
-    if (agoraLaunchConfig?.appId) {
-      handleEnter();
-    }
-  }, [agoraLaunchConfig]);
   return (
     <div className="classtalk-enter-wrapper">
       <ClasstalkInfo onDone={(params: InClassTalkConfig) => handleFetchDone(params)} />
