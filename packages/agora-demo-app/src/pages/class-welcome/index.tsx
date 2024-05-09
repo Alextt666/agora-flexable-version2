@@ -3,7 +3,7 @@ import ClasstalkInfo from './info/Info';
 import CompositeArea from './composite/index';
 import type { InClassTalkConfig, TableInfo, AgoraConfig, TableInfoProps } from '@app/ctype';
 import { useHistory } from 'react-router';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { GlobalStoreContext } from '@app/stores';
 import { checkBrowserDevice } from '@app/utils/browser';
 import './index.css';
@@ -80,6 +80,10 @@ const InterItem = (props: TableInfoProps) => {
   const { tableConfig, onEnter } = props;
   const { startTime, endTime, subjectName, onlineTeacher, offlineTeacher, courseName } =
     tableConfig;
+  // alex-tag-temp-tz
+  useEffect(() => {
+    onEnter();
+  }, []);
   return (
     <div className="inter-item">
       <div className="fcr-p-2 fcr-pl-6 fcr-text-white fcr-text-lg fcr-font-bold">
