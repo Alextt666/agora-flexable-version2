@@ -54,6 +54,13 @@ export const ClassWelcome = observer(() => {
     setLaunchConfig({ language, region, pretest, ...config, ...agoraLaunchConfig });
     history.push('/launch');
   };
+  // 自动加入机制
+  // Tz项目临时
+  useEffect(() => {
+    if (agoraLaunchConfig?.appId) {
+      handleEnter();
+    }
+  }, [agoraLaunchConfig]);
   return (
     <div className="classtalk-enter-wrapper">
       <ClasstalkInfo onDone={(params: InClassTalkConfig) => handleFetchDone(params)} />
@@ -80,10 +87,6 @@ const InterItem = (props: TableInfoProps) => {
   const { tableConfig, onEnter } = props;
   const { startTime, endTime, subjectName, onlineTeacher, offlineTeacher, courseName } =
     tableConfig;
-  // alex-tag-temp-tz
-  useEffect(() => {
-    onEnter();
-  }, []);
   return (
     <div className="inter-item">
       <div className="fcr-p-2 fcr-pl-6 fcr-text-white fcr-text-lg fcr-font-bold">
