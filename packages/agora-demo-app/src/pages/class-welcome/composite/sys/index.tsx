@@ -1,5 +1,5 @@
 import { useClasstalkSystem } from '@app/hooks/classtalkhooks/useClasstalkSystem';
-import { ScreenIcon, WifiIcon, CameraIcon } from '../icons';
+import { ScreenIcon, WifiIcon, CameraIcon } from '@app/utils/classicons';
 import { SysInfoText } from './stype';
 const SystemInfo = () => {
   const [screenNum, cameraNum, sysMemo, sysFreeMemo, dl, rtt] = useClasstalkSystem();
