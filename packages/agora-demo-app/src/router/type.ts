@@ -15,4 +15,5 @@ export enum PageRouter {
   QuickJoin = 'quick_join',
   Window = 'window',
   ClassTalk = 'class_talk',
+  ClassRecord = 'csrecord',
 }

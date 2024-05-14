@@ -12,6 +12,8 @@ import { RouteComponentProps } from 'react-router';
 import { Detail } from '../pages/detail';
 // import { FlexPage } from '../pages/flex';
 import { ClassTalk } from '@app/pages/class-talk';
+import { ClassRecord } from '@app/pages/class-record';
+
 import { QuickStart } from '../pages/quick-start';
 import { LaunchWindowPage } from '../pages/window';
 import { ClassWelcome } from '@app/pages/class-welcome';
@@ -92,6 +94,12 @@ export const commonRoutesMap = {
   [PageRouter.ClassTalk]: {
     path: '/class-talk',
     component: () => <ClassTalk />,
+    exact: false,
+  },
+  // alex-tag-router-record
+  [PageRouter.ClassRecord]: {
+    path: '/csrecord',
+    component: () => <ClassRecord />,
     exact: false,
   },
   // Animation container

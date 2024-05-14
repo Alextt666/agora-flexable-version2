@@ -75,16 +75,20 @@ const hasCourseWareList = (options: IHasCourseWareList) => {
 
 export const useClasstalkInfo = (props: ClassInfoProps) => {
   const [classtalkName, setClasstalkName] = useState<string>('');
+
   useEffect(() => {
     // alex-tag-check-mac-fe
+    console.log('alex-enter-info');
     if (window?.require) {
       const ipc = window.require('electron').ipcRenderer;
-      const MessageKey = Math.floor(Math.random() * 10000);
+      const MessageSuccessKey = 'alex-msg-key-success';
+      const MessageErrorKey = 'alex-msg-key-error';
       ipc.on('alex-check-mac-reply', async (_, args) => {
         try {
           aMessage.loading({
             content: '获取课表信息...',
-            key: MessageKey,
+            key: MessageSuccessKey,
+            duration: 1,
           });
           const isDev = false; // 方便调试
           const { name, id: croomId } = await getClassroomInfo({ isDev, mac: args || '' });
@@ -103,9 +107,14 @@ export const useClasstalkInfo = (props: ClassInfoProps) => {
           props.onDone({ agoraConfig, tableInfo });
         } catch (e) {
           console.log(new Error(`IPCError - IPC | Parse Error - ${e}`));
-          aMessage.error('获取课表信息失败，请刷新重试');
-        } finally {
-          aMessage.destroy(MessageKey);
+          aMessage.destroy(MessageSuccessKey);
+          setTimeout(() => {
+            aMessage.error({
+              content: '获取课表信息失败，请刷新重试',
+              key: MessageErrorKey,
+              duration: 1,
+            });
+          }, 500);
         }
       });
       ipc.send('alex-check-mac', 'main', 'alex');

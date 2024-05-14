@@ -41,4 +41,4 @@ const ClasstalkInfo: React.FC<ClasstalkInfoProps> = (props: ClassInfoProps) => {
   );
 };
 
-export default ClasstalkInfo;
+export default ClasstalkInfo

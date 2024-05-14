@@ -3,7 +3,7 @@ import ClasstalkInfo from './info/Info';
 import CompositeArea from './composite/index';
 import type { InClassTalkConfig, TableInfo, AgoraConfig, TableInfoProps } from '@app/ctype';
 import { useHistory } from 'react-router';
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import { GlobalStoreContext } from '@app/stores';
 import { checkBrowserDevice } from '@app/utils/browser';
 import './index.css';

@@ -1,10 +1,13 @@
 import { VideoIcon, FilesIcon } from '../icons';
+import { useHistory } from 'react-router';
 const UnderSection = () => {
+  const history = useHistory();
+  // alex-tag-to-record
   const handleRecord = () => {
-    const ipc = window.require('electron').ipcRenderer;
-    // ipc.send('alex-start-record', 'main', 'alex');
-    console.log('record: ipc-instance-to-main', ipc);
+    console.log('record: ipc-instance-to-main');
+    history.push('/csrecord');
   };
+  // alex-tag-to-resource
   const handleResource = () => {
     console.log('resource: FE-fetch-api');
   };
