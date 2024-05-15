@@ -2,9 +2,12 @@ import { observer } from 'mobx-react';
 import { useHistory } from 'react-router';
 import './index.css';
 import { HomeIcon } from '@app/utils/classicons';
+import { CanvasComp } from './canvas';
+import { SettingComp } from './settings';
+import { useState } from 'react';
 export const ClassRecord = observer(() => {
   const history = useHistory();
-
+  const [show, setShow] = useState(false);
   const handleBack = () => {
     history.push('/');
   };
@@ -21,8 +24,8 @@ export const ClassRecord = observer(() => {
         </nav>
       </header>
       <div className="classtalk-content-wrapper">
-        <div>canvas</div>
-        <div>miaoshu</div>
+        <CanvasComp isRecording={show}></CanvasComp>
+        <SettingComp onBtnChange={(state) => setShow(state)} isRecording={show}></SettingComp>
         <div>record</div>
       </div>
     </div>
