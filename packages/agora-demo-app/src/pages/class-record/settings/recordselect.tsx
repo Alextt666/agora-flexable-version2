@@ -1,4 +1,6 @@
+import { useCanvasStream } from '@app/hooks/classtalkhooks/useCanvasStream';
 export const RecordSelect = () => {
+  const { createProcess } = useCanvasStream();
   const handleOpenRecord = () => {
     const iptDom = document.createElement('input');
     iptDom.type = 'file';
@@ -6,8 +8,7 @@ export const RecordSelect = () => {
       const input = event.target as HTMLInputElement;
       const file = input.files ? input.files[0] : null;
       if (file) {
-       
-        
+        createProcess({ isLocal: false });
         // videoPlayer.src =;
         // videoPlayer.play();
       }
