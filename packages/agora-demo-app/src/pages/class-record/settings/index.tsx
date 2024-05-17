@@ -1,15 +1,19 @@
 import { PlayIcon, StopIcon } from '@app/utils/classicons';
-
+import { ResolutionComp } from './resolutioncomp';
+import { RecordSelect } from './recordselect';
 export const SettingComp = (props: {
   onBtnChange: (state: boolean) => void;
   isRecording: boolean;
 }) => {
+  // 录制状态
   const handleStart = () => {
     props.onBtnChange(true);
   };
   const handleEnd = () => {
     props.onBtnChange(false);
   };
+  // 地址
+  const recordUrl = 'rtsp://192.168.1.88/4';
 
   return (
     <div className="fcr-flex fcr-justify-center fcr-items-center fcr-text-center">
@@ -19,7 +23,7 @@ export const SettingComp = (props: {
       <div className="fcr-text-white fcr-flex-1 fcr-h-full fcr-flex fcr-items-center fcr-flex-col">
         <div className="fcr-flex fcr-w-full fcr-justify-evenly fcr-pt-4 fcr-h-1/3">
           {/* <div>课程名称: xxxx小学 </div> */}
-          <div>摄像头地址: rtsp://192.168.1.88/4</div>
+          <div>直播源地址: {recordUrl}</div>
         </div>
         {!props.isRecording ? (
           <div onClick={handleStart} className="fcr-cursor-pointer">
@@ -31,7 +35,9 @@ export const SettingComp = (props: {
           </div>
         )}
       </div>
-      <div className="fcr-w-1/4">right</div>
+      <div className="fcr-w-1/4">
+        <RecordSelect></RecordSelect>
+      </div>
     </div>
   );
 };
@@ -39,42 +45,4 @@ export const SettingComp = (props: {
 const ImageIcon = (props: { className: string; iconSrc: string }) => {
   const className = props.className || '';
   return <img key={Math.random()} src={props.iconSrc} className={className} />;
-};
-
-const ResolutionComp = () => {
-  const RESOLUTIONS = ['1920 * 1080', '1280 * 720 ', '1024 * 768 '];
-  
-  return (
-    <div className="fcr-text-white">
-      <div className='fcr-flex fcr-justify-around fcr-items-center '>
-       
-        <div >
-        <div>清晰度</div>
-          {RESOLUTIONS.map((item, index) => {
-            return (
-              <div key={item} className="fcr-text-left">
-                <input type="radio" id={item} name="resolution" value={item} />
-                <label htmlFor={item} className="fcr-pl-2">
-                  {item}
-                </label>
-              </div>
-            );
-          })}
-        </div>
-        <div >
-        <div>帧率/FPS</div>
-          {RESOLUTIONS.map((item, index) => {
-            return (
-              <div key={item} className="fcr-text-left">
-                <input type="radio" id={item} name="resolution" value={item} />
-                <label htmlFor={item} className="fcr-pl-2">
-                  {item}
-                </label>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </div>
-  );
 };

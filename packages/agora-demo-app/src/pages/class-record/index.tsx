@@ -25,7 +25,7 @@ export const ClassRecord = observer(() => {
       </header>
       <div className="classtalk-content-wrapper">
         <CanvasComp isRecording={show}></CanvasComp>
-        <SettingComp onBtnChange={(state) => setShow(state)} isRecording={show}></SettingComp>
+        <SettingComp onBtnChange={(state) => setShow(state)} isRecording={show} ></SettingComp>
         <div>record</div>
       </div>
     </div>
