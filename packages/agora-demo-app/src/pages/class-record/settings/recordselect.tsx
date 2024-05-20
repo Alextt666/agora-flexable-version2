@@ -4,13 +4,13 @@ export const RecordSelect = () => {
   const handleOpenRecord = () => {
     const iptDom = document.createElement('input');
     iptDom.type = 'file';
+    iptDom.accept = 'video/*';
     iptDom.addEventListener('change', (event) => {
       const input = event.target as HTMLInputElement;
       const file = input.files ? input.files[0] : null;
       if (file) {
-        createProcess({ isLocal: false });
-        // videoPlayer.src =;
-        // videoPlayer.play();
+        const localURL = URL.createObjectURL(file);
+        createProcess({ isLocal: false, localURL });
       }
     });
     iptDom.click();
