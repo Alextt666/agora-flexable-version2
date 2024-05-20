@@ -4,7 +4,7 @@ import { useCanvasStream } from '@app/hooks/classtalkhooks/useCanvasStream';
 export const CanvasComp = (props: { isRecording: boolean }) => {
   const { createProcess } = useCanvasStream();
   useEffect(() => {
-    createProcess();
+    createProcess({isLocal:true});
   }, []);
 
   return (
@@ -23,6 +23,7 @@ export const CanvasComp = (props: { isRecording: boolean }) => {
       </div>
       <div>
         <video autoPlay id="video" controls style={{ display: 'none' }}></video>
+        <video autoPlay id="video-local" controls style={{ display: 'none' }}></video>
       </div>
     </div>
   );

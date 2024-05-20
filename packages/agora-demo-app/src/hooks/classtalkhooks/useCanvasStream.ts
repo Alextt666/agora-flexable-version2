@@ -1,6 +1,7 @@
 import { aMessage } from '@app/components/message';
 export const useCanvasStream = () => {
   let frameTimer: number;
+
   // 渲染视频流
   const rendStream = async (videoDom: HTMLVideoElement) => {
     const devices = await navigator.mediaDevices.enumerateDevices();
@@ -10,16 +11,14 @@ export const useCanvasStream = () => {
       video: { deviceId: OBS[0].deviceId },
       audio: false,
     });
-    if (videoDom) {
-      videoDom.srcObject = stream;
+    if (videoDom && stream) {
+      videoDom.srcObject = stream as MediaStream;
     }
   };
   // 渲染播放流
   const rendPlayStream = async (videoDom: HTMLVideoElement, url: string) => {
-    console.log(videoDom, url, '===========>video local');
     videoDom.src = url;
     videoDom.play();
-    videoDom.style.display = 'block'
   };
   // 渲染函数
   const canvasRander = (
@@ -33,18 +32,27 @@ export const useCanvasStream = () => {
       ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
     };
   };
+  // 闭包Dom
+  const catchDom = () => {
+    const video = document.querySelector('#video') as HTMLVideoElement;
+    const videoLocal = document.querySelector('#video-local') as HTMLVideoElement;
+    const canvas = document.querySelector('#render') as HTMLCanvasElement;
+    const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
+    return { video, videoLocal, canvas, ctx };
+  };
   // 开始渲染
   const createProcess: (config: { isLocal: boolean; localURL?: string }) => void = async (
     config = { isLocal: true },
   ) => {
     const { isLocal, localURL } = config;
-    const video = document.querySelector('#video') as HTMLVideoElement;
-    const canvas = document.querySelector('#render') as HTMLCanvasElement;
-    const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
+    const { video, videoLocal, canvas, ctx } = catchDom();
     canvas.height = 460;
     canvas.width = canvas.height / (9 / 16);
     video.addEventListener('play', () => {
       canvasRander(ctx, canvas, video)();
+    });
+    videoLocal.addEventListener('play', () => {
+      canvasRander(ctx, canvas, videoLocal)();
     });
     try {
       if (isLocal) {
@@ -59,7 +67,7 @@ export const useCanvasStream = () => {
         });
         return;
       }
-      await rendPlayStream(video, localURL);
+      await rendPlayStream(videoLocal, localURL);
     } catch (e) {
       aMessage.warning({
         key: 'compileFail',
@@ -71,6 +79,9 @@ export const useCanvasStream = () => {
 
   // 停止渲染
   const stopProcess = () => {
+    const { video, videoLocal } = catchDom();
+    video.pause();
+    videoLocal.pause();
     window.cancelAnimationFrame(frameTimer);
   };
 
