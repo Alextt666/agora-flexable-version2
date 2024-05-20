@@ -1,4 +1,5 @@
 import { aMessage } from '@app/components/message';
+
 export const useCanvasStream = () => {
   let frameTimer: number;
 
@@ -76,7 +77,6 @@ export const useCanvasStream = () => {
       });
     }
   };
-
   // 停止渲染
   const stopProcess = () => {
     const { video, videoLocal } = catchDom();

@@ -4,6 +4,7 @@ import './index.css';
 import { HomeIcon } from '@app/utils/classicons';
 import { CanvasComp } from './canvas';
 import { SettingComp } from './settings';
+import { RecordArea } from './record';
 import { useState } from 'react';
 export const ClassRecord = observer(() => {
   const history = useHistory();
@@ -25,8 +26,8 @@ export const ClassRecord = observer(() => {
       </header>
       <div className="classtalk-content-wrapper">
         <CanvasComp isRecording={show}></CanvasComp>
-        <SettingComp onBtnChange={(state) => setShow(state)} isRecording={show} ></SettingComp>
-        <div>record</div>
+        <SettingComp onBtnChange={(state) => setShow(state)} isRecording={show}></SettingComp>
+        <RecordArea></RecordArea>
       </div>
     </div>
   );

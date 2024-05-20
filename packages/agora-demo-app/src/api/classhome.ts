@@ -74,3 +74,13 @@ export async function getAgoraData({ isDev, id }: { isDev: boolean; id: string }
     throw new Error(`Request Error - table - info: ${error || ''}`);
   }
 }
+
+// 获取录制列表
+export async function fetchRecordList({  pageNum = 1, pageSize = 5 }) {
+  const result = await fetch(
+    `https://h5.classkid.net/api/courseRecord/list/?classroomId=${sessionStorage.getItem(
+      'croomId',
+    )}&pageNum=${pageNum}&pageSize=${pageSize}`,
+  ).then((res) => res.json());
+  return result
+}
