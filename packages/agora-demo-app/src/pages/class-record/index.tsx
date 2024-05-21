@@ -20,7 +20,7 @@ export const ClassRecord = observer(() => {
           <div
             className="fcr-w-6 fcr-flex fcr-justify-items-center fcr-items-center fcr-mr-12"
             onClick={handleBack}>
-            <ImageIcon className="fcr-w-full" iconSrc={HomeIcon}></ImageIcon>
+            <ImageIcon className="fcr-w-full fcr-cursor-pointer" iconSrc={HomeIcon}></ImageIcon>
           </div>
         </nav>
       </header>
