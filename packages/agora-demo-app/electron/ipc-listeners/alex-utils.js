@@ -1,5 +1,6 @@
 const os = require('os');
 const electron = require('electron');
+const child = require('child_process');
 function checkMac() {
   const interfaces = os.networkInterfaces();
   let macAddress;
@@ -27,7 +28,18 @@ function checkSys() {
   return sysObj;
 }
 
+function startRecord() {
+  const command = `obs-cli recording start`;
+  child.execSync(command);
+}
+function stopRecord() {
+  const command = `obs-cli recording stop`;
+  child.execSync(command);
+}
+
 module.exports = {
   checkMac,
   checkSys,
+  startRecord,
+  stopRecord,
 };

@@ -6,7 +6,7 @@ const { URLSearchParams } = require('url');
 const { Mutex } = require('./mutex');
 
 // alex-tag-window-system-info
-const { checkMac, checkSys } = require('./alex-utils');
+const { checkMac, checkSys, startRecord, stopRecord } = require('./alex-utils');
 
 const windowStateMap = {};
 const windowMap = {};
@@ -64,7 +64,7 @@ function createBrowserWindow(windowID, queryStr, options) {
     minHeight: options.minHeight,
     maxWidth: options.maxWidth,
     maxHeight: options.maxHeight,
-    autoHideMenuBar:true,
+    autoHideMenuBar: true,
     // useContentSize: options.useContentSize ?? false,
     // center: options.center ?? true,
     webPreferences: {
@@ -316,6 +316,26 @@ function addListeners() {
       sysRes = { error, code: 10004 };
     }
     e.reply('alex-get-sysinfo-reply', `${JSON.stringify(sysRes)}`);
+  });
+
+  delegate.on('alex-start-record', (e, args) => {
+    console.log(args, 'RECORD_ARGS');
+    try {
+      startRecord();
+    } catch (error) {
+      console.log('OBS_RECORD_ERROR');
+    }
+    // e.reply('alex-get-sysinfo-reply', `${JSON.stringify(sysRes)}`);
+  });
+
+  delegate.on('alex-stop-record', (e, args) => {
+    console.log(args, 'RECORD_ARGS');
+    try {
+      stopRecord();
+    } catch (error) {
+      console.log('OBS_RECORD_ERROR');
+    }
+    // e.reply('alex-get-sysinfo-reply', `${JSON.stringify(sysRes)}`);
   });
 
   transmit('rtc-raw-data-transmit');

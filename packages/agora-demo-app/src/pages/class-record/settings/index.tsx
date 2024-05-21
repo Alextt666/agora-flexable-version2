@@ -8,9 +8,11 @@ export const SettingComp = (props: {
   // 录制状态
   const handleStart = () => {
     props.onBtnChange(true);
+    window.require('electron').ipcRenderer.send('alex-start-record');
   };
   const handleEnd = () => {
     props.onBtnChange(false);
+    window.require('electron').ipcRenderer.send('alex-stop-record');
   };
   // 地址
   const recordUrl = 'rtsp://192.168.1.88/4';
