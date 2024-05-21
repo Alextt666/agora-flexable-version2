@@ -1,6 +1,7 @@
 import { fetchRecordList } from '@app/api/classhome';
 import { useEffect, useState } from 'react';
 import { Archeron, LeftIcon, RightIcon } from '@app/utils/classicons';
+import { useCanvasStream } from '@app/hooks/classtalkhooks/useCanvasStream';
 interface RecordListItem {
   cover: string;
   name: string;
@@ -9,6 +10,7 @@ interface RecordListItem {
 }
 export const RecordArea = () => {
   const [recordList, setRecordList] = useState<RecordListItem[]>();
+
   const initRecord = async () => {
     const res = await fetchRecordList({});
     console.log(res);
@@ -54,8 +56,21 @@ export const RecordArea = () => {
 
 const GridItem = (props: { name: string; cover: string; fileUrl: string }) => {
   const { name, cover, fileUrl } = props;
+  const { createProcess, stopProcess } = useCanvasStream();
+
+  const handleRemoteRender = () => {
+    try {
+      stopProcess();
+      createProcess({ isLocal: false, localURL: fileUrl });
+    } catch (e) {
+      console.log('error');
+    }
+  };
   return (
-    <div className=" fcr-cursor-pointer fcr-bg-black" style={{ border: '1px solid #ccc' }}>
+    <div
+      className=" fcr-cursor-pointer fcr-bg-black"
+      style={{ border: '1px solid #ccc' }}
+      onClick={handleRemoteRender}>
       <img src={cover || Archeron} alt="cover" />
       <div className="fcr-text-white fcr-text-center ">{`${name.substring(0, 8)}...`}</div>
     </div>

@@ -2,9 +2,10 @@ import { useEffect } from 'react';
 import { useCanvasStream } from '@app/hooks/classtalkhooks/useCanvasStream';
 
 export const CanvasComp = (props: { isRecording: boolean }) => {
-  const { createProcess } = useCanvasStream();
+  const { createProcess, RegMoni } = useCanvasStream();
   useEffect(() => {
-    createProcess({isLocal:true});
+    createProcess({ isLocal: true });
+    RegMoni();
   }, []);
 
   return (

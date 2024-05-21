@@ -85,5 +85,19 @@ export const useCanvasStream = () => {
     window.cancelAnimationFrame(frameTimer);
   };
 
-  return { createProcess, stopProcess };
+  // moni
+  const RegMoni = () => {
+    const CASE_DOM_LOAD = 'Failed to load because no supported source was found.';
+    // 监控路径分析错误
+    window.addEventListener('unhandledrejection', ({ reason = '' }) => {
+      const resStr = reason.toString();
+      if (resStr.includes(CASE_DOM_LOAD)) {
+        aMessage.error({
+          content: '文件路径错误,请检查是否403||404',
+          duration: 1,
+        });
+      }
+    });
+  };
+  return { createProcess, stopProcess, RegMoni };
 };
