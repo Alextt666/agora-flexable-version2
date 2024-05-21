@@ -5,7 +5,6 @@
     height: 100vh;
 }
 .classtalk-content-wrapper{
-    border: 1px solid #ccc;
     height: calc(100vh - 8rem);
     display: grid;
     grid-template-rows: 2fr 1fr 1fr;

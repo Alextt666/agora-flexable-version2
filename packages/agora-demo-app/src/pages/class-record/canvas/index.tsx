@@ -11,8 +11,8 @@ export const CanvasComp = (props: { isRecording: boolean }) => {
   return (
     <div
       className=" fcr-flex fcr-justify-center fcr-items-center"
-      style={{ border: '1px solid black' }}>
-      <div style={{ border: '1px solid #ccc' }} className="fcr-relative">
+      >
+      <div className="fcr-relative">
         <canvas id="render"></canvas>
         {props.isRecording && (
           <span
