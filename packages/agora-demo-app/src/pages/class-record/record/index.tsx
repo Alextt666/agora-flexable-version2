@@ -14,8 +14,8 @@ export const RecordArea = () => {
   const [pageNum, setPageNum] = useState(1);
   const pageSize = 5;
 
-  const initRecord = async () => {
-    const res = await fetchRecordList({ pageNum, pageSize });
+  const initRecord = async (controller: AbortController) => {
+    const res = await fetchRecordList({ pageNum, pageSize, controller });
     const filterArr = res.rows.map((row: any) => {
       return {
         name: row.name || 'default',
@@ -38,14 +38,14 @@ export const RecordArea = () => {
     }
   };
   useEffect(() => {
-    initRecord();
+    const controller = new AbortController();
+    initRecord(controller);
+    return () => controller.abort();
   }, [pageNum]);
   return (
     <div>
-      <div className='fcr-text-white fcr-text-lg fcr-font-bold fcr-pl-6'>远端录制件</div>
-      <div
-        className="fcr-flex fcr-justify-items-center fcr-items-center fcr-mt-2"
-        >
+      <div className="fcr-text-white fcr-text-lg fcr-font-bold fcr-pl-6">远端录制件</div>
+      <div className="fcr-flex fcr-justify-items-center fcr-items-center fcr-mt-2">
         <div className="fcr-w-1/6 fcr-flex fcr-justify-end fcr-mr-8">
           <img
             src={LeftIcon}
@@ -96,9 +96,7 @@ const GridItem = (props: { name: string; cover: string; fileUrl: string }) => {
     }
   };
   return (
-    <div
-      className=" fcr-cursor-pointer fcr-bg-black"
-      onClick={handleRemoteRender}>
+    <div className=" fcr-cursor-pointer fcr-bg-black" onClick={handleRemoteRender}>
       <img src={cover || Archeron} alt="cover" style={{ maxHeight: '130px', minHeight: '130px' }} />
       <div className="fcr-text-white fcr-text-center ">{`${name.substring(0, 8)}...`}</div>
     </div>

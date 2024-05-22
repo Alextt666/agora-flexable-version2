@@ -4,15 +4,18 @@ enum ResId {
   FAILE = 10004,
 }
 
-const baseRequest = async ({
-  isDev,
-  url,
-  inData = true,
-}: {
+interface BaseItem {
   isDev: boolean;
   url: string;
   inData: boolean;
-}) => {
+}
+
+interface RecordArg {
+  pageNum: number;
+  pageSize: number;
+  controller: AbortController;
+}
+const baseRequest = async ({ isDev, url, inData = true }: BaseItem) => {
   const domain = classtalkDomain({ isDev });
   const result = await fetch(`${domain}${url}`).then((res) => res.json());
   if (result?.data && inData) {
@@ -76,11 +79,12 @@ export async function getAgoraData({ isDev, id }: { isDev: boolean; id: string }
 }
 
 // 获取录制列表
-export async function fetchRecordList({  pageNum = 1, pageSize = 5 }) {
+export async function fetchRecordList({ pageNum = 1, pageSize = 5, controller }: RecordArg) {
   const result = await fetch(
     `https://h5.classkid.net/api/courseRecord/list/?classroomId=${sessionStorage.getItem(
       'croomId',
     )}&pageNum=${pageNum}&pageSize=${pageSize}`,
+    { signal: controller.signal },
   ).then((res) => res.json());
-  return result
+  return result;
 }
