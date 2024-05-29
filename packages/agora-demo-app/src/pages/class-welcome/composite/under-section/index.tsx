@@ -4,12 +4,11 @@ const UnderSection = () => {
   const history = useHistory();
   // alex-tag-to-record
   const handleRecord = () => {
-    console.log('record: ipc-instance-to-main');
     history.push('/csrecord');
   };
   // alex-tag-to-resource
   const handleResource = () => {
-    console.log('resource: FE-fetch-api');
+    history.push('/csresource');
   };
   return (
     <div className="fcr-mt-6 fcr-grid fcr-grid-cols-2 fcr-gap-6 fcr-text-white fcr-font-bold fcr-text-lg">

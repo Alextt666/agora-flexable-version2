@@ -13,6 +13,7 @@ import { Detail } from '../pages/detail';
 // import { FlexPage } from '../pages/flex';
 import { ClassTalk } from '@app/pages/class-talk';
 import { ClassRecord } from '@app/pages/class-record';
+import { ClassResource } from '@app/pages/class-resource';
 
 import { QuickStart } from '../pages/quick-start';
 import { LaunchWindowPage } from '../pages/window';
@@ -100,6 +101,12 @@ export const commonRoutesMap = {
   [PageRouter.ClassRecord]: {
     path: '/csrecord',
     component: () => <ClassRecord />,
+    exact: false,
+  },
+  // alex-tag-router-record
+  [PageRouter.ClassResource]: {
+    path: '/csresource',
+    component: () => <ClassResource />,
     exact: false,
   },
   // Animation container

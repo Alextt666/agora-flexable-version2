@@ -16,4 +16,5 @@ export enum PageRouter {
   Window = 'window',
   ClassTalk = 'class_talk',
   ClassRecord = 'csrecord',
+  ClassResource = 'csresource'
 }
